@@ -1,0 +1,51 @@
+{
+  "certificate_check": {
+    "branch_nodes": 2393072,
+    "collinear_triples": 2712,
+    "column_bound_leaves": 548232,
+    "n": 9,
+    "nodes": 6313888,
+    "row_bound_leaves": 3372584,
+    "status": "VERIFIED_UNSAT",
+    "target": 16,
+    "zero_determinant_quadruples": 29152
+  },
+  "enumeration": {
+    "circles": 6722,
+    "collinear_triples": 2712,
+    "concyclic_quadruples": 25996,
+    "lines": 296,
+    "n": 9,
+    "sha256": "f08dda705dfc93c87abd34704ee7953dd3cded602ee68c33ccd7602120c4fbc5"
+  },
+  "geometry_cross_check": "ALL_28708_FORBIDDEN_SETS_EQUAL",
+  "independent_search": {
+    "capacity_prunes": 23274110,
+    "circular_quadruples": 25996,
+    "collinear_triples": 2712,
+    "four_collinear_quadruples": 3156,
+    "n": 9,
+    "node_limit": 0,
+    "nodes": 26199928,
+    "status": "EXHAUSTED",
+    "target": 16
+  },
+  "maximum": 15,
+  "negative_tests_rejected": ["truncated", "trailing", "false-row-bound", "invalid-branch", "wrong-magic", "mismatched-target"],
+  "proof_replay": "BYTE_IDENTICAL",
+  "proof_sha256": "02d9106347ad5bdf4264d7301403fca1ad1b5cea6ea332999e9571d60107fd99",
+  "sat_producer_refuses_certificate": true,
+  "status": "VERIFIED",
+  "target16": "UNSAT",
+  "witness_sha256": "5023e4e2decf9d3d6e61f758776752d1a498877102b544356368d32e195c7a2d",
+  "witness_verification": {
+    "collinear_triples": [],
+    "n": 9,
+    "quadruples_checked": 1365,
+    "size": 15,
+    "triples_checked": 455,
+    "valid": true,
+    "witness_sha256": "5023e4e2decf9d3d6e61f758776752d1a498877102b544356368d32e195c7a2d",
+    "zero_circle_determinant_quadruples": []
+  }
+}

@@ -1,0 +1,82 @@
+name: Reproduce certificate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/certify.yml'
+      - 'src/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - 'witnesses/witness15.json'
+      - 'REPRODUCE.md'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: grid9-certificate-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  certify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - name: Checkout exact source revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+
+      - name: Regenerate, cross-check and verify
+        run: python3 scripts/audit.py --sanitizers
+
+      - name: Record public CI provenance
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          record = {key: os.environ[key] for key in ('SOURCE_SHA','RUN_ID','RUN_ATTEMPT','GITHUB_REPOSITORY')}
+          record['classification'] = 'VERIFIED_IN_FRESH_GITHUB_ACTIONS_RUNNER'
+          Path('results/remote-run.json').write_text(json.dumps(record, indent=2, sort_keys=True)+'\n')
+          PY
+
+      - name: Commit regenerated checked evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f proofs/n9-k16.trace.gz manifests/certificate.json results/audit-summary.json results/audit-environment.json results/audit.log results/remote-run.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'result: retain independently reproduced certificate and audit evidence'
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
+          fi
+
+      - name: Upload self-contained audit package
+        uses: actions/upload-artifact@v4
+        with:
+          name: grid9-certified-result
+          if-no-files-found: error
+          retention-days: 90
+          path: |
+            proofs/n9-k16.trace.gz
+            manifests/
+            results/audit-summary.json
+            results/audit-environment.json
+            results/audit.log
+            results/remote-run.json
+            src/
+            scripts/
+            tests/
+            witnesses/witness15.json
+            README.md
+            REPRODUCE.md
+            STATUS.md
+            docs/

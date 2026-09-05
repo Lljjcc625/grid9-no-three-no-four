@@ -1,0 +1,66 @@
+{
+  "problem": "Maximum size of a subset of {0,...,8}^2 with no three collinear and no four concyclic",
+  "result": "VERIFIED_UNSAT_FOR_16",
+  "maximum": 15,
+  "lower_bound": 15,
+  "upper_bound": 15,
+  "proof_kind": "Custom exhaustive-tree certificate with independent exact determinant and full-coverage checker; not DRAT or proof-assistant formalization",
+  "certificate": {
+    "path": "proofs/n9-k16.trace",
+    "format": "GRIDPROOF 1",
+    "bytes": 6313905,
+    "sha256": "02d9106347ad5bdf4264d7301403fca1ad1b5cea6ea332999e9571d60107fd99",
+    "deterministic_replay": "BYTE_IDENTICAL",
+    "compressed_path": "proofs/n9-k16.trace.gz",
+    "gzip_bytes": 2159159,
+    "gzip_sha256": "985cf5a467407a3d58a83164351d7e1e7b580ca899c0cf6cfe1b9c6e81da37d6"
+  },
+  "checker": {
+    "source": "src/check_proof.cpp",
+    "command": "./check_proof proofs/n9-k16.trace 9 16",
+    "exit_code": 0,
+    "status": "VERIFIED_UNSAT",
+    "nodes": 6313888,
+    "row_bound_leaves": 3372584,
+    "column_bound_leaves": 548232,
+    "branch_nodes": 2393072,
+    "collinear_triples": 2712,
+    "zero_determinant_quadruples": 29152,
+    "geometry": "Full integer 3x3 and 4x4 determinants rebuilt from grid coordinates; no producer incidence file",
+    "symmetry_reduction": false
+  },
+  "producer": {
+    "source": "src/prove.cpp",
+    "command": "./prove instances/groups.txt 16 proofs/n9-k16.trace",
+    "instance_json_sha256": "f08dda705dfc93c87abd34704ee7953dd3cded602ee68c33ccd7602120c4fbc5",
+    "packed_groups_sha256": "a839c302019dc321cd9c339371b6cf54cabc99b0a1ded4d944e1d3d12c8c9157"
+  },
+  "independent_pointwise_search": {
+    "source": "src/independent.cpp",
+    "status": "EXHAUSTED",
+    "nodes": 26199928,
+    "capacity_prunes": 23274110,
+    "node_limit": 0,
+    "symmetry_reduction": false,
+    "forbidden_sets_cross_check": "Exact equality for all 2712 triples and 25996 genuine circle quadruples"
+  },
+  "witness": {
+    "path": "witnesses/witness15.json",
+    "sha256": "5023e4e2decf9d3d6e61f758776752d1a498877102b544356368d32e195c7a2d",
+    "points": [[0,0],[1,0],[5,1],[7,1],[0,2],[3,3],[5,3],[7,4],[8,4],[2,5],[4,5],[6,7],[8,7],[1,8],[2,8]],
+    "independent_verifier": "src/verify.py",
+    "valid": true,
+    "triples_checked": 455,
+    "quadruples_checked": 1365
+  },
+  "global_upper_bound_argument": "If a larger valid set existed, any 16-point subset would also be valid, contradicting the checked target-16 certificate.",
+  "historical_remote_reproduction": {
+    "run_id": 33972726876,
+    "status": "SUCCESS",
+    "evidence_commit": "02523ff0aed6ec59a58582ed4cd0b78c372344a3",
+    "final_handoff_commit": "ddad281bf0412f721f7ad0626453e58f6edf8afb",
+    "artifact_id": 9971408408,
+    "artifact_sha256": "167cd76fb3dc01ecacdf3a2b93e359bf0eb1b2e4c137786584fd9122b0ae633b",
+    "redownload_check": "VERIFIED"
+  }
+}
