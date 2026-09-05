@@ -31,7 +31,14 @@
     "target": 16
   },
   "maximum": 15,
-  "negative_tests_rejected": ["truncated", "trailing", "false-row-bound", "invalid-branch", "wrong-magic", "mismatched-target"],
+  "negative_tests_rejected": [
+    "truncated",
+    "trailing",
+    "false-row-bound",
+    "invalid-branch",
+    "wrong-magic",
+    "mismatched-target"
+  ],
   "proof_replay": "BYTE_IDENTICAL",
   "proof_sha256": "02d9106347ad5bdf4264d7301403fca1ad1b5cea6ea332999e9571d60107fd99",
   "sat_producer_refuses_certificate": true,

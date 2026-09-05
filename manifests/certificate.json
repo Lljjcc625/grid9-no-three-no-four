@@ -1,0 +1,28 @@
+{
+  "compressed": {
+    "bytes": 2159159,
+    "path": "proofs/n9-k16.trace.gz",
+    "sha256": "985cf5a467407a3d58a83164351d7e1e7b580ca899c0cf6cfe1b9c6e81da37d6"
+  },
+  "format": "GRIDPROOF 1",
+  "n": 9,
+  "sources": {
+    "src/check_proof.cpp": "ba28d7518f6309b2cc4d7d8266529dda29a7490b9558b2dddcff1e22d695cc9c",
+    "src/geometry.py": "63aa4aa0c65a347b7aedf7a5341a46864529e0032448c0db82dbef1c86ac64b9",
+    "src/independent.cpp": "3fbcc94ca4b598e3436da805698ab851d2d1358d9b1d035c410620db3dc2ad3b",
+    "src/pack.py": "d7aa27b65510e49441a2e7ecbaf6ef277de4313dcf5bc181ecd0b05a606fb171",
+    "src/prove.cpp": "9f00bdb152328518c7a9c7810c3469494046d878484bb0e52622751995d5dbf1",
+    "src/verify.py": "fe41b7084d9aaaefbeab0fe37839e794f3137d3697e77b367a00de649827b540"
+  },
+  "symmetry_reduction": false,
+  "target": 16,
+  "uncompressed": {
+    "bytes": 6313905,
+    "path": "proofs/n9-k16.trace",
+    "sha256": "02d9106347ad5bdf4264d7301403fca1ad1b5cea6ea332999e9571d60107fd99"
+  },
+  "witness": {
+    "path": "witnesses/witness15.json",
+    "sha256": "5023e4e2decf9d3d6e61f758776752d1a498877102b544356368d32e195c7a2d"
+  }
+}

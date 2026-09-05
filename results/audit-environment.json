@@ -1,0 +1,310 @@
+{
+  "commands": [
+    {
+      "command": [
+        "g++",
+        "--version"
+      ],
+      "returncode": 0,
+      "seconds": 0.0536484979999976
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "src/geometry.py",
+        "--n",
+        "9",
+        "--out",
+        "instances/grid9.json"
+      ],
+      "returncode": 0,
+      "seconds": 0.34869481999999863
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "src/pack.py"
+      ],
+      "returncode": 0,
+      "seconds": 0.05108876799999962
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "returncode": 0,
+      "seconds": 4.422046834
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "src/verify.py",
+        "witnesses/witness15.json",
+        "--n",
+        "9",
+        "--size",
+        "15"
+      ],
+      "returncode": 0,
+      "seconds": 0.0751768929999983
+    },
+    {
+      "command": [
+        "g++",
+        "-O3",
+        "-std=c++17",
+        "-Wall",
+        "-Wextra",
+        "src/prove.cpp",
+        "-o",
+        "/tmp/grid9-audit-wpjl6xua/prove"
+      ],
+      "returncode": 0,
+      "seconds": 2.527449520999994
+    },
+    {
+      "command": [
+        "g++",
+        "-O3",
+        "-std=c++17",
+        "-Wall",
+        "-Wextra",
+        "src/check_proof.cpp",
+        "-o",
+        "/tmp/grid9-audit-wpjl6xua/check_proof"
+      ],
+      "returncode": 0,
+      "seconds": 0.6564656549999981
+    },
+    {
+      "command": [
+        "g++",
+        "-O3",
+        "-std=c++17",
+        "-Wall",
+        "-Wextra",
+        "src/independent.cpp",
+        "-o",
+        "/tmp/grid9-audit-wpjl6xua/independent"
+      ],
+      "returncode": 0,
+      "seconds": 0.8435968970000047
+    },
+    {
+      "command": [
+        "/tmp/grid9-audit-wpjl6xua/prove",
+        "instances/groups.txt",
+        "16",
+        "proofs/n9-k16.trace"
+      ],
+      "returncode": 0,
+      "seconds": 1.0991114639999964
+    },
+    {
+      "command": [
+        "/tmp/grid9-audit-wpjl6xua/check_proof",
+        "proofs/n9-k16.trace",
+        "9",
+        "16"
+      ],
+      "returncode": 0,
+      "seconds": 2.3446712240000025
+    },
+    {
+      "command": [
+        "/tmp/grid9-audit-wpjl6xua/prove",
+        "instances/groups.txt",
+        "16",
+        "/tmp/grid9-audit-wpjl6xua/replay.trace"
+      ],
+      "returncode": 0,
+      "seconds": 1.0897007049999985
+    },
+    {
+      "command": [
+        "/tmp/grid9-audit-wpjl6xua/independent",
+        "9",
+        "16",
+        "0",
+        "/tmp/grid9-audit-wpjl6xua/unexpected16.json",
+        "/tmp/grid9-audit-wpjl6xua/independent-edges.txt"
+      ],
+      "returncode": 0,
+      "seconds": 2.2115742349999934
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "src/geometry.py",
+        "--n",
+        "4",
+        "--out",
+        "/tmp/grid9-audit-wpjl6xua/grid4.json"
+      ],
+      "returncode": 0,
+      "seconds": 0.03580387799999585
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "src/pack.py",
+        "--instance",
+        "/tmp/grid9-audit-wpjl6xua/grid4.json",
+        "--out",
+        "/tmp/grid9-audit-wpjl6xua/groups4.txt"
+      ],
+      "returncode": 0,
+      "seconds": 0.03253937699999909
+    },
+    {
+      "command": [
+        "/tmp/grid9-audit-wpjl6xua/prove",
+        "/tmp/grid9-audit-wpjl6xua/groups4.txt",
+        "7",
+        "/tmp/grid9-audit-wpjl6xua/n4-k7.trace"
+      ],
+      "returncode": 0,
+      "seconds": 0.001709470999998075
+    },
+    {
+      "command": [
+        "/tmp/grid9-audit-wpjl6xua/check_proof",
+        "/tmp/grid9-audit-wpjl6xua/n4-k7.trace",
+        "4",
+        "7"
+      ],
+      "returncode": 0,
+      "seconds": 0.0015111159999960933
+    },
+    {
+      "command": [
+        "/tmp/grid9-audit-wpjl6xua/check_proof",
+        "/tmp/grid9-audit-wpjl6xua/truncated.trace",
+        "4",
+        "7"
+      ],
+      "returncode": 1,
+      "seconds": 0.0014490920000014285
+    },
+    {
+      "command": [
+        "/tmp/grid9-audit-wpjl6xua/check_proof",
+        "/tmp/grid9-audit-wpjl6xua/trailing.trace",
+        "4",
+        "7"
+      ],
+      "returncode": 1,
+      "seconds": 0.001397055999994734
+    },
+    {
+      "command": [
+        "/tmp/grid9-audit-wpjl6xua/check_proof",
+        "/tmp/grid9-audit-wpjl6xua/false-row-bound.trace",
+        "4",
+        "7"
+      ],
+      "returncode": 1,
+      "seconds": 0.0013614260000025524
+    },
+    {
+      "command": [
+        "/tmp/grid9-audit-wpjl6xua/check_proof",
+        "/tmp/grid9-audit-wpjl6xua/invalid-branch.trace",
+        "4",
+        "7"
+      ],
+      "returncode": 1,
+      "seconds": 0.0013782800000043949
+    },
+    {
+      "command": [
+        "/tmp/grid9-audit-wpjl6xua/check_proof",
+        "/tmp/grid9-audit-wpjl6xua/wrong-magic.trace",
+        "4",
+        "7"
+      ],
+      "returncode": 1,
+      "seconds": 0.000950056000000643
+    },
+    {
+      "command": [
+        "/tmp/grid9-audit-wpjl6xua/check_proof",
+        "/tmp/grid9-audit-wpjl6xua/n4-k7.trace",
+        "4",
+        "6"
+      ],
+      "returncode": 1,
+      "seconds": 0.0009236510000008025
+    },
+    {
+      "command": [
+        "/tmp/grid9-audit-wpjl6xua/prove",
+        "/tmp/grid9-audit-wpjl6xua/groups4.txt",
+        "6",
+        "/tmp/grid9-audit-wpjl6xua/must-not-exist.trace"
+      ],
+      "returncode": 1,
+      "seconds": 0.0011332879999983447
+    },
+    {
+      "command": [
+        "g++",
+        "-O1",
+        "-std=c++17",
+        "-fsanitize=undefined",
+        "-fno-sanitize-recover=all",
+        "src/prove.cpp",
+        "-o",
+        "/tmp/grid9-audit-wpjl6xua/prove-ubsan"
+      ],
+      "returncode": 0,
+      "seconds": 0.6604458099999988
+    },
+    {
+      "command": [
+        "g++",
+        "-O1",
+        "-std=c++17",
+        "-fsanitize=undefined",
+        "-fno-sanitize-recover=all",
+        "src/check_proof.cpp",
+        "-o",
+        "/tmp/grid9-audit-wpjl6xua/check_proof-ubsan"
+      ],
+      "returncode": 0,
+      "seconds": 0.6952310109999971
+    },
+    {
+      "command": [
+        "/tmp/grid9-audit-wpjl6xua/prove-ubsan",
+        "instances/groups.txt",
+        "16",
+        "/tmp/grid9-audit-wpjl6xua/sanitized.trace"
+      ],
+      "returncode": 0,
+      "seconds": 2.6293434619999942
+    },
+    {
+      "command": [
+        "/tmp/grid9-audit-wpjl6xua/check_proof-ubsan",
+        "/tmp/grid9-audit-wpjl6xua/sanitized.trace",
+        "9",
+        "16"
+      ],
+      "returncode": 0,
+      "seconds": 5.607838831999999
+    }
+  ],
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "elapsed_seconds": 29.707499265000003,
+  "full_undefined_behavior_sanitizer_replay_passed": true,
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+  "retained_compressed_proof_checked": false
+}

@@ -1,0 +1,111 @@
+$ g++ --version
+g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+$ /usr/bin/python3 src/geometry.py --n 9 --out instances/grid9.json
+{
+  "n": 9,
+  "lines": 296,
+  "circles": 6722,
+  "collinear_triples": 2712,
+  "concyclic_quadruples": 25996,
+  "sha256": "f08dda705dfc93c87abd34704ee7953dd3cded602ee68c33ccd7602120c4fbc5"
+}
+
+$ /usr/bin/python3 src/pack.py
+a839c302019dc321cd9c339371b6cf54cabc99b0a1ded4d944e1d3d12c8c9157
+
+$ /usr/bin/python3 -m unittest discover -s tests -v
+test_basic (test_geometry.GeometryTests.test_basic) ... ok
+test_d4_and_random (test_geometry.GeometryTests.test_d4_and_random) ... ok
+test_n3_bruteforce_maximum (test_geometry.GeometryTests.test_n3_bruteforce_maximum) ... ok
+test_small_exhaustive (test_geometry.GeometryTests.test_small_exhaustive) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 4.363s
+
+OK
+
+$ /usr/bin/python3 src/verify.py witnesses/witness15.json --n 9 --size 15
+{
+  "valid": true,
+  "n": 9,
+  "size": 15,
+  "triples_checked": 455,
+  "quadruples_checked": 1365,
+  "collinear_triples": [],
+  "zero_circle_determinant_quadruples": [],
+  "witness_sha256": "5023e4e2decf9d3d6e61f758776752d1a498877102b544356368d32e195c7a2d"
+}
+
+$ g++ -O3 -std=c++17 -Wall -Wextra src/prove.cpp -o /tmp/grid9-audit-wpjl6xua/prove
+
+$ g++ -O3 -std=c++17 -Wall -Wextra src/check_proof.cpp -o /tmp/grid9-audit-wpjl6xua/check_proof
+
+$ g++ -O3 -std=c++17 -Wall -Wextra src/independent.cpp -o /tmp/grid9-audit-wpjl6xua/independent
+
+$ /tmp/grid9-audit-wpjl6xua/prove instances/groups.txt 16 proofs/n9-k16.trace
+{"status":"CERTIFICATE_PRODUCED","n":9,"target":16,"nodes":6313888,"row_prunes":3372584,"column_prunes":548232,"leaves":0,"node_limit":0,"root_reflection":false,"seconds":1.09105}
+
+$ /tmp/grid9-audit-wpjl6xua/check_proof proofs/n9-k16.trace 9 16
+{"status":"VERIFIED_UNSAT","n":9,"target":16,"nodes":6313888,"row_bound_leaves":3372584,"column_bound_leaves":548232,"branch_nodes":2393072,"collinear_triples":2712,"zero_determinant_quadruples":29152,"seconds":2.34312}
+
+$ /tmp/grid9-audit-wpjl6xua/prove instances/groups.txt 16 /tmp/grid9-audit-wpjl6xua/replay.trace
+{"status":"CERTIFICATE_PRODUCED","n":9,"target":16,"nodes":6313888,"row_prunes":3372584,"column_prunes":548232,"leaves":0,"node_limit":0,"root_reflection":false,"seconds":1.08313}
+
+$ /tmp/grid9-audit-wpjl6xua/independent 9 16 0 /tmp/grid9-audit-wpjl6xua/unexpected16.json /tmp/grid9-audit-wpjl6xua/independent-edges.txt
+{"status":"EXHAUSTED","n":9,"target":16,"nodes":26199928,"capacity_prunes":23274110,"collinear_triples":2712,"circular_quadruples":25996,"four_collinear_quadruples":3156,"node_limit":0,"generation_seconds":0.0232263,"total_seconds":2.21001}
+
+$ /usr/bin/python3 src/geometry.py --n 4 --out /tmp/grid9-audit-wpjl6xua/grid4.json
+{
+  "n": 4,
+  "lines": 14,
+  "circles": 59,
+  "collinear_triples": 44,
+  "concyclic_quadruples": 184,
+  "sha256": "5f4268da6d7c7c86a8d47b57f2f9f096be2846159f502aab807c01f62ba494c4"
+}
+
+$ /usr/bin/python3 src/pack.py --instance /tmp/grid9-audit-wpjl6xua/grid4.json --out /tmp/grid9-audit-wpjl6xua/groups4.txt
+e3cf0955c545f71dfce398bf91b6a969edf029713f849c06945c167df2dcb039
+
+$ /tmp/grid9-audit-wpjl6xua/prove /tmp/grid9-audit-wpjl6xua/groups4.txt 7 /tmp/grid9-audit-wpjl6xua/n4-k7.trace
+{"status":"CERTIFICATE_PRODUCED","n":4,"target":7,"nodes":195,"row_prunes":124,"column_prunes":12,"leaves":0,"node_limit":0,"root_reflection":false,"seconds":4.6862e-05}
+
+$ /tmp/grid9-audit-wpjl6xua/check_proof /tmp/grid9-audit-wpjl6xua/n4-k7.trace 4 7
+{"status":"VERIFIED_UNSAT","n":4,"target":7,"nodes":195,"row_bound_leaves":124,"column_bound_leaves":12,"branch_nodes":59,"collinear_triples":44,"zero_determinant_quadruples":194,"seconds":0.000382537}
+
+$ /tmp/grid9-audit-wpjl6xua/check_proof /tmp/grid9-audit-wpjl6xua/truncated.trace 4 7
+REJECTED: truncated certificate
+
+$ /tmp/grid9-audit-wpjl6xua/check_proof /tmp/grid9-audit-wpjl6xua/trailing.trace 4 7
+REJECTED: trailing certificate data
+
+$ /tmp/grid9-audit-wpjl6xua/check_proof /tmp/grid9-audit-wpjl6xua/false-row-bound.trace 4 7
+REJECTED: invalid row-capacity leaf
+
+$ /tmp/grid9-audit-wpjl6xua/check_proof /tmp/grid9-audit-wpjl6xua/invalid-branch.trace 4 7
+REJECTED: invalid branch row
+
+$ /tmp/grid9-audit-wpjl6xua/check_proof /tmp/grid9-audit-wpjl6xua/wrong-magic.trace 4 7
+REJECTED: invalid or mismatched header
+
+$ /tmp/grid9-audit-wpjl6xua/check_proof /tmp/grid9-audit-wpjl6xua/n4-k7.trace 4 6
+REJECTED: invalid or mismatched header
+
+$ /tmp/grid9-audit-wpjl6xua/prove /tmp/grid9-audit-wpjl6xua/groups4.txt 6 /tmp/grid9-audit-wpjl6xua/must-not-exist.trace
+No UNSAT certificate produced
+
+$ g++ -O1 -std=c++17 -fsanitize=undefined -fno-sanitize-recover=all src/prove.cpp -o /tmp/grid9-audit-wpjl6xua/prove-ubsan
+
+$ g++ -O1 -std=c++17 -fsanitize=undefined -fno-sanitize-recover=all src/check_proof.cpp -o /tmp/grid9-audit-wpjl6xua/check_proof-ubsan
+
+$ /tmp/grid9-audit-wpjl6xua/prove-ubsan instances/groups.txt 16 /tmp/grid9-audit-wpjl6xua/sanitized.trace
+{"status":"CERTIFICATE_PRODUCED","n":9,"target":16,"nodes":6313888,"row_prunes":3372584,"column_prunes":548232,"leaves":0,"node_limit":0,"root_reflection":false,"seconds":2.60183}
+
+$ /tmp/grid9-audit-wpjl6xua/check_proof-ubsan /tmp/grid9-audit-wpjl6xua/sanitized.trace 9 16
+{"status":"VERIFIED_UNSAT","n":9,"target":16,"nodes":6313888,"row_bound_leaves":3372584,"column_bound_leaves":548232,"branch_nodes":2393072,"collinear_triples":2712,"zero_determinant_quadruples":29152,"seconds":5.60613}
+
