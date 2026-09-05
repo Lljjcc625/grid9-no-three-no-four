@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use or discuss this result, please cite the archived preprint below."
+title: "The Maximum Mixed-General-Position Subset of the 9x9 Integer Grid Has Size 15"
+type: software
+authors:
+  - family-names: "Li"
+    given-names: "Jinchen"
+repository-code: "https://github.com/Lljjcc625/grid9-no-three-no-four"
+url: "https://github.com/Lljjcc625/grid9-no-three-no-four"
+version: "1.0"
+date-released: 2026-09-06
+keywords:
+  - combinatorics
+  - computational geometry
+  - computer-assisted proof
+  - proof certificate
+  - integer grid
+license: MIT
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "Li"
+      given-names: "Jinchen"
+  title: "The Maximum Mixed-General-Position Subset of the 9x9 Integer Grid Has Size 15"
+  year: 2026
+  doi: "10.5281/zenodo.22368316"
+  url: "https://doi.org/10.5281/zenodo.22368316"
